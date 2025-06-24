@@ -3,29 +3,117 @@ let coins = 0;
 let hearts = 3;
 let correctAnswers = 0;
 let selectedOption = null;
+let timerInterval;
+let timerValue = 10;
+let timeTaken = 0;
 
 const questions = [
-  { type: 'match', title: "Selecciona el grupo con 2 objetos", count: 2, options: [1, 2, 3, 4], correct: 2 },
-  { type: 'match', title: "¿Qué grupo tiene 5 semillas?", count: 5, options: [3, 4, 5, 6], correct: 5 },
-  { type: 'match', title: "Elige el conjunto con 1 objeto", count: 1, options: [0, 1, 2, 3], correct: 1 },
-  { type: 'match', title: "¿Cuál cantidad representa esta imagen?", count: 4, options: [2, 4, 5, 6], correct: 4 },
-  { type: 'match', title: "¿Cuántos objetos hay?", count: 6, options: [6, 5, 7, 8], correct: 6 },
-  { type: 'match', title: "Selecciona el número que representa lo que ves", count: 3, options: [2, 3, 4, 5], correct: 3 },
-  { type: 'match', title: "¿Qué número corresponde al grupo mostrado?", count: 7, options: [6, 7, 8, 9], correct: 7 },
-  { type: 'match', title: "Relaciona la cantidad con el número correcto", count: 8, options: [7, 8, 6, 9], correct: 8 },
-  { type: 'match', title: "¿Qué número representa esta colección?", count: 9, options: [9, 10, 8, 7], correct: 9 },
-  { type: 'match', title: "Escoge el número que representa los objetos", count: 5, options: [4, 5, 6, 7], correct: 5 },
-  { type: 'match', title: "¿Qué cantidad se muestra?", count: 10, options: [8, 9, 10, 7], correct: 10 },
-  { type: 'match', title: "¿Cuántos círculos ves?", count: 6, options: [6, 5, 7, 4], correct: 6 },
-  { type: 'match', title: "Escoge el número correcto para esta cantidad", count: 2, options: [1, 2, 3, 4], correct: 2 }
+  { 
+    type: 'match', 
+    title: "¡Cuenta las manzanas rojas! 🍎", 
+    count: 3, 
+    emoji: '🍎',
+    options: [2, 3, 4, 5], 
+    correct: 3 
+  },
+  { 
+    type: 'match', 
+    title: "¿Cuántas estrellitas brillan? ⭐", 
+    count: 5, 
+    emoji: '⭐',
+    options: [4, 5, 6, 3], 
+    correct: 5 
+  },
+  { 
+    type: 'match', 
+    title: "¡Solo hay una pelota! ⚽", 
+    count: 1, 
+    emoji: '⚽',
+    options: [0, 1, 2, 3], 
+    correct: 1 
+  },
+  { 
+    type: 'match', 
+    title: "Cuenta los corazones de amor 💖", 
+    count: 4, 
+    emoji: '💖',
+    options: [3, 4, 5, 2], 
+    correct: 4 
+  },
+  { 
+    type: 'match', 
+    title: "¿Cuántas flores hay en el jardín? 🌸", 
+    count: 6, 
+    emoji: '🌸',
+    options: [5, 6, 7, 4], 
+    correct: 6 
+  },
+  { 
+    type: 'match', 
+    title: "Los patitos van nadando 🦆", 
+    count: 2, 
+    emoji: '🦆',
+    options: [1, 2, 3, 4], 
+    correct: 2 
+  },
+  { 
+    type: 'match', 
+    title: "¡Cuenta las caramelos dulces! 🍬", 
+    count: 7, 
+    emoji: '🍬',
+    options: [6, 7, 8, 5], 
+    correct: 7 
+  },
+  { 
+    type: 'match', 
+    title: "Los gatitos juegan juntos 🐱", 
+    count: 8, 
+    emoji: '🐱',
+    options: [7, 8, 9, 6], 
+    correct: 8 
+  },
+  { 
+    type: 'match', 
+    title: "¿Cuántos globos vuelan alto? 🎈", 
+    count: 9, 
+    emoji: '🎈',
+    options: [8, 9, 10, 7], 
+    correct: 9 
+  },
+  { 
+    type: 'match', 
+    title: "Las mariposas bailan 🦋", 
+    count: 4, 
+    emoji: '🦋',
+    options: [3, 4, 5, 6], 
+    correct: 4 
+  },
+  { 
+    type: 'match', 
+    title: "¡Son muchos pastelitos! 🧁", 
+    count: 10, 
+    emoji: '🧁',
+    options: [9, 10, 8, 11], 
+    correct: 10 
+  },
+  { 
+    type: 'match', 
+    title: "Los soles brillan radiantes ☀️", 
+    count: 3, 
+    emoji: '☀️',
+    options: [2, 3, 4, 1], 
+    correct: 3 
+  }
 ];
 
-function generateObjects(count) {
-  const emojis = ['🍎', '🪨', '🌰', '🍓', '🌟', '🍇', '🌼'];
+function generateObjects(count, emoji) {
+  // Si no se especifica emoji, usar uno aleatorio
+  const defaultEmojis = ['🍎', '🪨', '🌰', '🍓', '🌟', '🍇', '🌼', '⚽', '🔵', '🧩', '🍪'];
+  const selectedEmoji = emoji || defaultEmojis[Math.floor(Math.random() * defaultEmojis.length)];
+  
   let html = '<div class="objects-container">';
   for (let i = 0; i < count; i++) {
-    const emoji = emojis[i % emojis.length];
-    html += `<div class="object-item">${emoji}</div>`;
+    html += `<div class="object-item animate-bounce-${i % 3}">${selectedEmoji}</div>`;
   }
   html += '</div>';
   return html;
@@ -39,12 +127,18 @@ function initLesson() {
 }
 
 function showQuestion() {
+  clearInterval(timerInterval);
+  timerValue = 10;
+  timeTaken = 0;
+  updateTimerBar();
+
   const q = questions[currentQuestionIndex];
   document.getElementById('questionTitle').textContent = q.title;
   document.getElementById('btnContinue').disabled = true;
   selectedOption = null;
 
-  document.getElementById('questionContent').innerHTML = generateObjects(q.count);
+  // Usar el emoji específico de la pregunta si existe
+  document.getElementById('questionContent').innerHTML = generateObjects(q.count, q.emoji);
 
   const optionsContainer = document.getElementById('questionOptions');
   optionsContainer.innerHTML = '';
@@ -56,6 +150,16 @@ function showQuestion() {
     btn.onclick = () => selectOption(btn, opt);
     optionsContainer.appendChild(btn);
   });
+
+  timerInterval = setInterval(() => {
+    timerValue--;
+    timeTaken++;
+    updateTimerBar();
+    if (timerValue <= 0) {
+      clearInterval(timerInterval);
+      document.getElementById('btnContinue').disabled = false;
+    }
+  }, 1000);
 }
 
 function selectOption(button, value) {
@@ -66,6 +170,7 @@ function selectOption(button, value) {
 }
 
 function nextQuestion() {
+  clearInterval(timerInterval);
   if (!selectedOption) return;
   const q = questions[currentQuestionIndex];
   const correct = String(selectedOption) === String(q.correct);
@@ -75,6 +180,7 @@ function nextQuestion() {
     correctAnswers++;
     coins += 100;
     updateCoins();
+    document.getElementById('coinChangeTextCorrect').textContent = '+100 monedas';
     setTimeout(() => showModal('correctModal'), 800);
   } else {
     hearts--;
@@ -107,6 +213,59 @@ function continueAfterModal() {
 
 function showModal(id) {
   document.getElementById(id).classList.add('show');
+  // Feedback visual motivacional más variado
+  if (id === 'correctModal') {
+    triggerConfetti();
+    const motivationalMessages = [
+      '¡Excelente! ¡Eres increíble!',
+      '¡Muy bien! ¡Sigue así!',
+      '¡Perfecto! ¡Eres un campeón!',
+      '¡Genial! ¡Lo hiciste súper bien!',
+      '¡Fantástico! ¡Eres muy inteligente!'
+    ];
+    const randomMessage = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+    setMotivationalText('correctModal', randomMessage);
+  } else if (id === 'incorrectModal') {
+    const encouragingMessages = [
+      '¡No te preocupes, tú puedes!',
+      '¡Inténtalo otra vez, casi lo tienes!',
+      '¡Está bien, todos aprendemos!',
+      '¡No pasa nada, sigues siendo genial!',
+      '¡Vamos, la próxima la tienes!'
+    ];
+    const randomMessage = encouragingMessages[Math.floor(Math.random() * encouragingMessages.length)];
+    setMotivationalText('incorrectModal', randomMessage);
+  }
+}
+
+function setMotivationalText(modalId, text) {
+  const modal = document.getElementById(modalId);
+  if (!modal) return;
+  let txt = modal.querySelector('.motivational-text');
+  if (!txt) {
+    txt = document.createElement('div');
+    txt.className = 'motivational-text';
+    txt.style.marginTop = '10px';
+    txt.style.fontSize = '16px';
+    txt.style.fontWeight = 'bold';
+    txt.style.color = modalId === 'correctModal' ? '#4CAF50' : '#FF9800';
+    modal.querySelector('.modal-content').appendChild(txt);
+  }
+  txt.textContent = text;
+}
+
+function triggerConfetti() {
+  if (window.confetti) {
+    window.confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff']
+    });
+  } else {
+    document.body.style.background = "linear-gradient(45deg, #b5f5c2, #ffd1dc)";
+    setTimeout(() => document.body.style.background = "", 500);
+  }
 }
 
 function closeModal() {
@@ -117,6 +276,32 @@ function closeModal() {
 function showCompletionModal() {
   document.getElementById('finalCoins').textContent = coins;
   document.getElementById('finalAccuracy').textContent = `${Math.round((correctAnswers / questions.length) * 100)}%`;
+  
+  // Mensaje especial según el rendimiento
+  const accuracy = (correctAnswers / questions.length) * 100;
+  let completionMessage = '';
+  if (accuracy >= 90) {
+    completionMessage = '¡Eres un súper genio de los números! 🌟';
+  } else if (accuracy >= 70) {
+    completionMessage = '¡Muy buen trabajo! ¡Sigue practicando! 👏';
+  } else {
+    completionMessage = '¡Buen intento! ¡La práctica te hará mejor! 💪';
+  }
+  
+  // Agregar mensaje personalizado al modal
+  const completedModal = document.getElementById('completedModal');
+  let customMsg = completedModal.querySelector('.custom-completion-message');
+  if (!customMsg) {
+    customMsg = document.createElement('p');
+    customMsg.className = 'custom-completion-message';
+    customMsg.style.fontSize = '18px';
+    customMsg.style.fontWeight = 'bold';
+    customMsg.style.color = '#4CAF50';
+    customMsg.style.marginTop = '15px';
+    completedModal.querySelector('.modal-content').insertBefore(customMsg, completedModal.querySelector('.completion-buttons'));
+  }
+  customMsg.textContent = completionMessage;
+  
   showModal('completedModal');
 }
 
@@ -143,7 +328,32 @@ function updateCoins() {
 function updateHearts() {
   for (let i = 1; i <= 3; i++) {
     const heart = document.getElementById(`heart${i}`);
-    i > hearts ? heart.classList.add('lost') : heart.classList.remove('lost');
+    if (i > hearts) {
+      heart.classList.add('lost');
+    } else {
+      heart.classList.remove('lost');
+    }
+  }
+}
+
+// Barra de tiempo funcional
+function updateTimerBar() {
+  const bar = document.getElementById('timerBar');
+  const barText = document.getElementById('timerBarText');
+  let percent = (timerValue / 10) * 100;
+  bar.style.width = percent + "%";
+
+  bar.classList.remove('low', 'critical');
+  if (timerValue <= 3) {
+    bar.classList.add('critical');
+  } else if (timerValue <= 6) {
+    bar.classList.add('low');
+  }
+
+  barText.textContent = timerValue > 0 ? timerValue : "¡Tiempo!";
+
+  if (timerValue === 3 && window.navigator && window.navigator.vibrate) {
+    window.navigator.vibrate(150);
   }
 }
 

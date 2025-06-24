@@ -99,11 +99,11 @@
 
     if (currentTopic === 'tema2') {
       boton.textContent = 'Continuar';
-      boton.onclick = () => window.location.href = 'modulo1/tema2_conteo/tema2.php';
+      boton.onclick = () => window.location.href = '/modulo1/tema2_conteo/leccion.php';
       titulo.textContent = 'Conteo con objetos reales';
     } else if (currentTopic === 'tema3') {
       boton.textContent = 'Continuar';
-      boton.onclick = () => window.location.href = 'modulo1/tema3_asociacion/tema3.php';
+      boton.onclick = () => window.location.href = 'modulo1/tema3_asociacion/leccion.php';
       titulo.textContent = 'Asociación número-cantidad';
     } else {
       boton.textContent = 'Empezar';

@@ -39,8 +39,9 @@
       </div>
 
       <!-- Barra de tiempo visual -->
-      <div class="timer-bar-container" style="margin-bottom: 1rem;">
-        <div id="timerBar" style="width: 100%; height: 12px; background: #ffc107; border-radius: 10px;"></div>
+      <div class="timer-bar-container">
+        <div id="timerBar" class="timer-bar-fill"></div>
+        <div id="timerBarText" class="timer-bar-text"></div>
       </div>
 
       <div class="question-content" id="questionContent"></div>
@@ -58,6 +59,7 @@
       <div class="modal-icon">🎉</div>
       <h3>¡Correcto!</h3>
       <p id="coinChangeTextCorrect">+100 monedas</p>
+      <!-- El texto motivacional lo añade el JS automáticamente -->
       <button class="modal-btn" onclick="closeModal()">Continuar</button>
     </div>
   </div>
@@ -68,6 +70,7 @@
       <h3>¡Oops!</h3>
       <p class="correct-answer" id="correctAnswerText">La respuesta correcta es: 5</p>
       <p id="coinChangeTextIncorrect">-200 monedas</p>
+      <!-- El texto motivacional lo añade el JS automáticamente -->
       <button class="modal-btn" onclick="closeModal()">Continuar</button>
     </div>
   </div>
@@ -93,6 +96,8 @@
     </div>
   </div>
 
+  <!-- Confetti y JS principal -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
   <script src="tema1.js"></script>
 </body>
 </html>

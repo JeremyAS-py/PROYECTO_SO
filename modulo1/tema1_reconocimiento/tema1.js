@@ -38,7 +38,6 @@ function showQuestion() {
 
   const q = questions[currentQuestionIndex];
   document.getElementById('questionTitle').textContent = q.title;
-  document.getElementById('questionContent').textContent = q.content;
   document.getElementById('btnContinue').disabled = true;
   selectedOption = null;
 
@@ -52,6 +51,15 @@ function showQuestion() {
     btn.onclick = () => selectOption(btn, opt);
     optionsContainer.appendChild(btn);
   });
+
+  const questionContent = document.getElementById('questionContent');
+  questionContent.innerHTML = '';
+  if (q.content && q.content !== '?') {
+    const numberDiv = document.createElement('div');
+    numberDiv.className = 'number-display';
+    numberDiv.textContent = q.content;
+    questionContent.appendChild(numberDiv);
+  }
 
   timerInterval = setInterval(() => {
     timerValue--;
@@ -81,14 +89,14 @@ function nextQuestion() {
 
   if (correct) {
     correctAnswers++;
-    const gained = 100 + timerValue * 10; // 🟢 Ganancia proporcional al tiempo restante
+    const gained = 100 + timerValue * 10;
     coins += gained;
     updateCoins();
     document.getElementById('coinChangeTextCorrect').textContent = `+${gained} monedas`;
     setTimeout(() => showModal('correctModal'), 800);
   } else {
     hearts--;
-    coins = Math.max(0, coins - 200); // 🔴 Resta por error
+    coins = Math.max(0, coins - 200);
     updateCoins();
     document.getElementById('correctAnswerText').textContent = `La respuesta correcta es: ${q.correct}`;
     document.getElementById('coinChangeTextIncorrect').textContent = `-200 monedas`;
@@ -121,6 +129,38 @@ function continueAfterModal() {
 
 function showModal(id) {
   document.getElementById(id).classList.add('show');
+  // Feedback visual motivacional
+  if (id === 'correctModal') {
+    triggerConfetti();
+    setMotivationalText('correctModal', '¡Muy bien! ¡Eres un genio!');
+  } else if (id === 'incorrectModal') {
+    setMotivationalText('incorrectModal', '¡No pasa nada, tú puedes!');
+  }
+}
+
+function setMotivationalText(modalId, text) {
+  const modal = document.getElementById(modalId);
+  if (!modal) return;
+  let txt = modal.querySelector('.motivational-text');
+  if (!txt) {
+    txt = document.createElement('div');
+    txt.className = 'motivational-text';
+    modal.querySelector('.modal-content').appendChild(txt);
+  }
+  txt.textContent = text;
+}
+
+function triggerConfetti() {
+  if (window.confetti) {
+    window.confetti({
+      particleCount: 70,
+      spread: 90,
+      origin: { y: 0.7 }
+    });
+  } else {
+    document.body.style.background = "#b5f5c2";
+    setTimeout(() => document.body.style.background = "", 350);
+  }
 }
 
 function closeModal() {
@@ -131,6 +171,7 @@ function closeModal() {
 function showCompletionModal() {
   document.getElementById('finalCoins').textContent = coins;
   document.getElementById('finalAccuracy').textContent = `${Math.round((correctAnswers / questions.length) * 100)}%`;
+  localStorage.setItem('currentTopic', 'tema2'); // <-- ESTA LÍNEA ES LA SOLUCIÓN
   showModal('completedModal');
 }
 
@@ -169,9 +210,22 @@ function updateHearts() {
 
 function updateTimerBar() {
   const bar = document.getElementById('timerBar');
-  bar.style.height = '12px';
-  bar.style.background = '#ffc107';
-  bar.style.width = `${(timerValue / 10) * 100}%`;
+  const barText = document.getElementById('timerBarText');
+  let percent = (timerValue / 10) * 100;
+  bar.style.width = percent + "%";
+
+  bar.classList.remove('low', 'critical');
+  if (timerValue <= 3) {
+    bar.classList.add('critical');
+  } else if (timerValue <= 6) {
+    bar.classList.add('low');
+  }
+
+  barText.textContent = timerValue > 0 ? timerValue : "¡Tiempo!";
+
+  if (timerValue === 3 && window.navigator && window.navigator.vibrate) {
+    window.navigator.vibrate(150);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', initLesson);

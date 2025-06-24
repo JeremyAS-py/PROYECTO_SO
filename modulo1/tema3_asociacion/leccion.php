@@ -12,10 +12,10 @@
   <!-- NAVBAR -->
   <div class="navbar-leccion">
     <div class="nav-left">
-      <button class="btn-cerrar" onclick="window.location.href='../detalle1.php'">✕</button>
+      <button class="btn-cerrar" onclick="window.location.href='../../detalle.php'">✕</button>
       <div class="progress-container">
         <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <span class="progress-text" id="progressText">1/10</span>
+        <span class="progress-text" id="progressText">1/12</span> <!-- Cambia a 1/12 si tienes 12 preguntas, ajusta si tienes otra cantidad -->
       </div>
     </div>
     <div class="nav-right">
@@ -37,6 +37,11 @@
       <div class="question-header">
         <h2 class="question-title" id="questionTitle">¿Pregunta?</h2>
       </div>
+      <!-- Barra de tiempo visual -->
+      <div class="timer-bar-container">
+        <div id="timerBar" class="timer-bar-fill"></div>
+        <div id="timerBarText" class="timer-bar-text"></div>
+      </div>
       <div class="question-content" id="questionContent"></div>
       <div class="question-options" id="questionOptions"></div>
     </div>
@@ -50,7 +55,8 @@
     <div class="modal-content correct">
       <div class="modal-icon">🎉</div>
       <h3>¡Correcto!</h3>
-      <p>+100 monedas</p>
+      <p id="coinChangeTextCorrect">+100 monedas</p>
+      <!-- El texto motivacional lo añade el JS automáticamente -->
       <button class="modal-btn" onclick="closeModal()">Continuar</button>
     </div>
   </div>
@@ -60,6 +66,7 @@
       <div class="modal-icon">😔</div>
       <h3>¡Oops!</h3>
       <p class="correct-answer" id="correctAnswerText">La respuesta correcta es: 5</p>
+      <!-- El texto motivacional lo añade el JS automáticamente -->
       <button class="modal-btn" onclick="closeModal()">Continuar</button>
     </div>
   </div>
@@ -85,6 +92,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
   <script src="tema3.js"></script>
 </body>
 </html>

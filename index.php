@@ -26,11 +26,11 @@
             <div class="streak card">
                 <h2>Racha</h2>
                 <img src="assets/fuego.png" alt="Fuego" class="icon-lg">
-                <div class="streak-days"><b>0 día(s)</b></div>
+                <div class="streak-days"><b id="streakCount">0 día(s)</b></div>
                 <div class="streak-desc">De aprendizaje</div>
             </div>
             <div class="coins card">
-                <div class="coins-value"><b>1000</b></div>
+                <div class="coins-value"><b id="userCoins">1000</b></div>
                 <div class="coin-row">
                     <div class="coin-icon">
                         <img src="assets/coin-symbol.png" alt="Moneda">
@@ -68,16 +68,46 @@
     </div>
 
     <script>
+      // Monedas actuales
+      const coins = parseInt(localStorage.getItem('coins')) || 0;
+      document.getElementById('userCoins').textContent = coins;
+
+      // Manejo de racha de días
+      function updateStreak() {
+        const streakKey = 'userStreak';
+        const lastVisitKey = 'lastVisit';
+        const today = new Date();
+        const lastVisit = localStorage.getItem(lastVisitKey);
+        let streak = parseInt(localStorage.getItem(streakKey)) || 0;
+        let showStreak = 1;
+
+        if (lastVisit) {
+          const last = new Date(lastVisit);
+          const diffTime = today.setHours(0,0,0,0) - last.setHours(0,0,0,0);
+          const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+          if (diffDays === 1) {
+            streak += 1;
+            showStreak = streak;
+          } else if (diffDays === 0) {
+            showStreak = streak;
+          } else {
+            streak = 1;
+            showStreak = streak;
+          }
+        }
+
+        localStorage.setItem(streakKey, showStreak);
+        localStorage.setItem(lastVisitKey, (new Date()).toISOString());
+        document.getElementById('streakCount').textContent = `${showStreak} día(s)`;
+      }
+
+      updateStreak();
+
+      // Botón principal
       const startBtn = document.getElementById('startBtn');
       const current = localStorage.getItem('currentTopic');
-
-      if (current === 'tema2') {
-        startBtn.textContent = 'Continuar';
-        startBtn.onclick = () => window.location.href = 'detalle.php';
-      } else if (current === 'tema3') {
-        startBtn.textContent = 'Continuar';
-        startBtn.onclick = () => window.location.href = 'detalle.php';
-      } else if (current === 'tema1') {
+      if (current === 'tema2' || current === 'tema3' || current === 'tema1') {
         startBtn.textContent = 'Continuar';
         startBtn.onclick = () => window.location.href = 'detalle.php';
       } else {
@@ -87,6 +117,3 @@
     </script>
 </body>
 </html>
-
-
-
