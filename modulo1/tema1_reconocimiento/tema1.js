@@ -117,7 +117,10 @@ function showAnswerFeedback(correct) {
 
 function continueAfterModal() {
   currentQuestionIndex++;
-  if (currentQuestionIndex >= questions.length || hearts <= 0) {
+  
+  if (hearts <= 0) {
+    showModal('lostModal'); // Mostrar mensaje de derrota
+  } else if (currentQuestionIndex >= questions.length) {
     localStorage.setItem('tema1Completed', 'true');
     localStorage.setItem('coins', coins);
     showCompletionModal();
@@ -126,6 +129,7 @@ function continueAfterModal() {
     showQuestion();
   }
 }
+
 
 function showModal(id) {
   document.getElementById(id).classList.add('show');
