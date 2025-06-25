@@ -14,6 +14,19 @@
       opacity: 0.5;
       cursor: not-allowed;
     }
+    .curso-block { margin-bottom: 48px; }
+    .curso-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 32px;
+    }
+    .curso-header .img-destacada {
+      width: 84px;
+      height: 84px;
+      object-fit: contain;
+      margin-right: 24px;
+    }
   </style>
 </head>
 <body>
@@ -33,75 +46,99 @@
     <h1 class="titulo">Cursos</h1>
     <p class="subtitulo">Todos los cursos necesarios para un buen aprendizaje</p>
 
-    <!-- Curso destacado -->
-    <div class="curso-destacado">
-      <img src="assets/math.png" alt="Matemáticas" class="img-destacada">
-      <div>
-        <div class="badge">RECOMENDADO</div>
-        <h2 class="curso-titulo">Matemáticas</h2>
+    <!-- CURSO: Matemáticas -->
+    <section class="curso-block">
+      <div class="curso-header">
+        <img src="assets/math.png" alt="Matemáticas" class="img-destacada">
+        <div>
+          <div class="badge">RECOMENDADO</div>
+          <h2 class="curso-titulo">Matemáticas</h2>
+        </div>
       </div>
-    </div>
+      <div class="grid-cursos">
+        <a href="detalle.php?modulo=1" class="link-curso" id="cursoEscritura">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/escritura.png" alt="Matemáticas"></div>
+            <span>Reconocimiento de números y su escritura.</span>
+          </div>
+        </a>
+        <a href="#" class="link-curso" id="cursoSuma">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/suma.png" alt="Suma hasta 10"></div>
+            <span>Suma hasta 10</span>
+          </div>
+        </a>
+        <a href="#" class="link-curso" id="cursoResta">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/resta.png" alt="Resta hasta 10"></div>
+            <span>Resta hasta 10</span>
+          </div>
+        </a>
+        <a href="#" class="link-curso" id="cursoVeinte">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/veinte.png" alt="Números del 11 al 20"></div>
+            <span>Números del 11 al 20</span>
+          </div>
+        </a>
+        <a href="#" class="link-curso" id="cursoFiguras">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/figuras.png" alt="Figuras geométricas básicas"></div>
+            <span>Figuras geométricas básicas</span>
+          </div>
+        </a>
+        <a href="#" class="link-curso" id="cursoMedicion">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/medicion.png" alt="Medición básica"></div>
+            <span>Medición básica</span>
+          </div>
+        </a>
+        <a href="#" class="link-curso" id="cursoOrientacion">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/direccion.png" alt="Orientación espacial"></div>
+            <span>Orientación espacial</span>
+          </div>
+        </a>
+        <a href="#" class="link-curso" id="cursoPatrones">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/patron.png" alt="Clasificación y patrones"></div>
+            <span>Clasificación y patrones</span>
+          </div>
+        </a>
+      </div>
+    </section>
 
-    <!-- Grid de cursos con imágenes y control de avance -->
-    <div class="grid-cursos">
-      <!-- Módulo I: siempre desbloqueado -->
-      <a href="detalle.php?modulo=1" class="link-curso" id="cursoEscritura">
-        <div class="curso-box">
-          <div class="curso-imagen"><img src="assets/escritura.png" alt="Matemáticas"></div>
-          <span>Reconocimiento de números y su escritura.</span>
+    <!-- CURSO: Comunicación -->
+    <section class="curso-block">
+      <div class="curso-header">
+        <img src="assets/libro.png" alt="Comunicación" class="img-destacada">
+        <div>
+          <h2 class="curso-titulo">Comunicación</h2>
         </div>
-      </a>
-      <!-- Módulo II: desbloqueo progresivo -->
-      <a href="#" class="link-curso" id="cursoSuma">
-        <div class="curso-box">
-          <div class="curso-imagen"><img src="assets/suma.png" alt="Suma hasta 10"></div>
-          <span>Suma hasta 10</span>
-        </div>
-      </a>
-      <!-- Módulo III: desbloqueo progresivo -->
-      <a href="#" class="link-curso" id="cursoResta">
-        <div class="curso-box">
-          <div class="curso-imagen"><img src="assets/resta.png" alt="Resta hasta 10"></div>
-          <span>Resta hasta 10</span>
-        </div>
-      </a>
-      <!-- Módulo IV -->
-      <a href="#" class="link-curso" id="cursoVeinte">
-        <div class="curso-box">
-          <div class="curso-imagen"><img src="assets/veinte.png" alt="Números del 11 al 20"></div>
-          <span>Números del 11 al 20</span>
-        </div>
-      </a>
-      <!-- Módulo V -->
-      <a href="#" class="link-curso" id="cursoFiguras">
-        <div class="curso-box">
-          <div class="curso-imagen"><img src="assets/figuras.png" alt="Figuras geométricas básicas"></div>
-          <span>Figuras geométricas básicas</span>
-        </div>
-      </a>
-      <!-- Módulo VI -->
-      <a href="#" class="link-curso" id="cursoMedicion">
-        <div class="curso-box">
-          <div class="curso-imagen"><img src="assets/medicion.png" alt="Medición básica"></div>
-          <span>Medición básica</span>
-        </div>
-      </a>
-      <!-- Módulo VII -->
-      <a href="#" class="link-curso" id="cursoOrientacion">
-        <div class="curso-box">
-          <div class="curso-imagen"><img src="assets/direccion.png" alt="Orientación espacial"></div>
-          <span>Orientación espacial</span>
-        </div>
-      </a>
-      <!-- Módulo VIII -->
-      <a href="#" class="link-curso" id="cursoPatrones">
-        <div class="curso-box">
-          <div class="curso-imagen"><img src="assets/patron.png" alt="Clasificación y patrones"></div>
-          <span>Clasificación y patrones</span>
-        </div>
-      </a>
-    </div>
+      </div>
+      <div class="grid-cursos">
+        <a href="#" class="link-curso">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/letras.png" alt="Letras y sílabas"></div>
+            <span>Lectura y comprensión</span>
+          </div>
+        </a>
+        <a href="#" class="link-curso">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/palabras.png" alt="Palabras y frases"></div>
+            <span>Gramática básica</span>
+          </div>
+        </a>
+        <a href="#" class="link-curso">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/comprension.png" alt="Comprensión"></div>
+            <span>Oratoria y expresión</span>
+          </div>
+        </a>
+      </div>
+    </section>
   </div>
+
+  <!-- El JS de avance solo aplica a Matemáticas -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       // Escritura siempre disponible
@@ -125,7 +162,7 @@
         };
       }
 
-      // Resta hasta 10 (solo si módulo 2 terminado)
+      // Resto de módulos matemáticas...
       const mod2Done = localStorage.getItem('modulo2_terminado') === 'true';
       const cursoResta = document.getElementById('cursoResta');
       if (mod2Done) {
@@ -141,7 +178,6 @@
         };
       }
 
-      // Números del 11 al 20 (solo si módulo 3 terminado)
       const mod3Done = localStorage.getItem('modulo3_terminado') === 'true';
       const cursoVeinte = document.getElementById('cursoVeinte');
       if (mod3Done) {
@@ -157,7 +193,6 @@
         };
       }
 
-      // Figuras geométricas básicas (solo si módulo 4 terminado)
       const mod4Done = localStorage.getItem('modulo4_terminado') === 'true';
       const cursoFiguras = document.getElementById('cursoFiguras');
       if (mod4Done) {
@@ -173,7 +208,6 @@
         };
       }
 
-      // Medición básica (solo si módulo 5 terminado)
       const mod5Done = localStorage.getItem('modulo5_terminado') === 'true';
       const cursoMedicion = document.getElementById('cursoMedicion');
       if (mod5Done) {
@@ -189,7 +223,6 @@
         };
       }
 
-      // Orientación espacial (solo si módulo 6 terminado)
       const mod6Done = localStorage.getItem('modulo6_terminado') === 'true';
       const cursoOrientacion = document.getElementById('cursoOrientacion');
       if (mod6Done) {
@@ -205,7 +238,6 @@
         };
       }
 
-      // Clasificación y patrones (solo si módulo 7 terminado)
       const mod7Done = localStorage.getItem('modulo7_terminado') === 'true';
       const cursoPatrones = document.getElementById('cursoPatrones');
       if (mod7Done) {

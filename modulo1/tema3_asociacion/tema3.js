@@ -187,9 +187,36 @@ function closeModal() {
 function showCompletionModal() {
   document.getElementById('finalCoins').textContent = coins;
   document.getElementById('finalAccuracy').textContent = `${Math.round((correctAnswers / questions.length) * 100)}%`;
+  
+  const accuracy = (correctAnswers / questions.length) * 100;
+  let completionMessage = '';
+  if (accuracy >= 90) {
+    completionMessage = '¡Eres un súper genio de los números! 🌟';
+  } else if (accuracy >= 70) {
+    completionMessage = '¡Muy buen trabajo! ¡Sigue practicando! 👏';
+  } else {
+    completionMessage = '¡Buen intento! ¡La práctica te hará mejor! 💪';
+  }
+  
+  const completedModal = document.getElementById('completedModal');
+  let customMsg = completedModal.querySelector('.custom-completion-message');
+  if (!customMsg) {
+    customMsg = document.createElement('p');
+    customMsg.className = 'custom-completion-message';
+    customMsg.style.fontSize = '18px';
+    customMsg.style.fontWeight = 'bold';
+    customMsg.style.color = '#4CAF50';
+    customMsg.style.marginTop = '15px';
+    completedModal.querySelector('.modal-content').insertBefore(customMsg, completedModal.querySelector('.completion-buttons'));
+  }
+  customMsg.textContent = completionMessage;
 
-  // Aquí reiniciamos al tema1 después de completar tema3
-  localStorage.setItem('currentTopic', 'tema1');
+  // ¡ESTA LÍNEA ES LA CLAVE PARA DESBLOQUEAR EL SIGUIENTE MÓDULO!
+  localStorage.setItem('modulo1_tema3_terminado', 'true'); // Tema individual
+  localStorage.setItem('modulo1_terminado', 'true');       // Módulo completo
+  
+  // TAMBIÉN guardar el progreso del módulo actual
+  localStorage.setItem('currentTopic_modulo1', 'completed');
 
   showModal('completedModal');
 }
