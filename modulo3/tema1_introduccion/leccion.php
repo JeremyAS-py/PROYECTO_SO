@@ -1,21 +1,21 @@
 <?php
-// Lección del tema 3: Asociación número-cantidad
+// Lección del módulo 3 - Tema 1: Introducción a la resta como quitar
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Lección: Asociación número-cantidad</title>
+  <title>Lección: Introduccion a la Resta</title>
   <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
   <!-- NAVBAR -->
   <div class="navbar-leccion">
     <div class="nav-left">
-      <button class="btn-cerrar" onclick="window.location.href='../../detalle.php'">✕</button>
+      <button class="btn-cerrar" onclick="window.location.href='../../detalle.php?modulo=3'">✕</button>
       <div class="progress-container">
         <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <span class="progress-text" id="progressText">1/12</span>
+        <span class="progress-text" id="progressText">1/10</span>
       </div>
     </div>
     <div class="nav-right">
@@ -37,7 +37,6 @@
       <div class="question-header">
         <h2 class="question-title" id="questionTitle">¿Pregunta?</h2>
       </div>
-      <!-- Barra de tiempo visual -->
       <div class="timer-bar-container">
         <div id="timerBar" class="timer-bar-fill"></div>
         <div id="timerBarText" class="timer-bar-text"></div>
@@ -50,7 +49,7 @@
     </div>
   </div>
 
-  <!-- MODAL CORRECTO -->
+  <!-- MODALES -->
   <div class="modal-overlay" id="correctModal">
     <div class="modal-content correct">
       <div class="modal-icon">🎉</div>
@@ -61,20 +60,6 @@
     </div>
   </div>
 
-   <!-- Modal para derrota (vidas = 0) -->
-<div id="lostModal" class="modal-overlay">
-  <div class="modal-content completed">
-    <div class="modal-icon">😵</div>
-    <h3>¡Suerte para la próxima!</h3>
-    <p>Perdiste tus 3 vidas. Intenta de nuevo con más calma.</p>
-    <div class="completion-buttons">
-      <button class="modal-btn" onclick="restartLesson()">Reintentar</button>
-      <button class="modal-btn secondary" onclick="window.location.href='../../cursos.php'">Volver al curso</button>
-    </div>
-  </div>
-</div>
-
-  <!-- MODAL INCORRECTO -->
   <div class="modal-overlay" id="incorrectModal">
     <div class="modal-content incorrect">
       <div class="modal-icon">😔</div>
@@ -86,30 +71,28 @@
     </div>
   </div>
 
-  <!-- MODAL DE COMPLETADO -->
   <div class="modal-overlay" id="completedModal">
     <div class="modal-content completed">
       <div class="modal-icon">🏁</div>
       <h3>¡Lección Completada!</h3>
       <div class="completion-stats">
         <div class="stat-item">
-          <span class="stat-number" id="finalCoins">1000</span>
-          <span class="stat-label">Monedas ganadas</span>
+          <span class="stat-number" id="finalCoins">0</span>
+          <span class="stat-label">Monedas</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number" id="finalAccuracy">90%</span>
+          <span class="stat-number" id="finalAccuracy">0%</span>
           <span class="stat-label">Precisión</span>
         </div>
       </div>
       <div class="completion-buttons">
-        <button class="modal-btn primary" onclick="window.location.href='../../detalle.php'">Continuar</button>
-        <button class="modal-btn secondary" onclick="restartLesson()">Repetir lección</button>
+        <button class="modal-btn" onclick="restartLesson()">Repetir</button>
+        <a href="../../detalle.php?modulo=3" class="modal-btn secondary">Volver al curso</a>
       </div>
     </div>
   </div>
 
-  <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
-  <script src="tema3.js"></script>
+  <script src="tema1.js"></script>
 </body>
 </html>

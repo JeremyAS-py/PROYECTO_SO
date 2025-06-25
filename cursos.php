@@ -29,7 +29,6 @@
     </div>
   </div>
 
-  <!-- CONTENIDO PRINCIPAL -->
   <div class="cursos-container">
     <h1 class="titulo">Cursos</h1>
     <p class="subtitulo">Todos los cursos necesarios para un buen aprendizaje</p>
