@@ -94,5 +94,20 @@
     <!-- Confetti y JS principal -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script src="tema1.js"></script>
+
+    <div id="mensajeFinal" style="display:none; font-size: 20px; text-align: center; color: green;">
+  🎉 ¡Módulo completado! Redirigiendo...
+</div>
+
+<script>
+  localStorage.setItem("modulo2_completo", "true");
+
+  document.getElementById("mensajeFinal").style.display = "block";
+
+  setTimeout(() => {
+    window.location.href = "detalle.php?modulo=2";
+  }, 2000);
+</script>
+
 </body>
 </html>

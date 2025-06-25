@@ -62,12 +62,13 @@
             <span>Reconocimiento de números y su escritura.</span>
           </div>
         </a>
-        <a href="#" class="link-curso" id="cursoSuma">
-          <div class="curso-box">
-            <div class="curso-imagen"><img src="assets/suma.png" alt="Suma hasta 10"></div>
-            <span>Suma hasta 10</span>
-          </div>
-        </a>
+        <a href="#" class="link-curso locked" id="cursoSuma">
+  <div class="curso-box">
+    <div class="curso-imagen"><img src="assets/suma.png" alt="Suma hasta 10"></div>
+    <span>Suma hasta 10</span>
+  </div>
+</a>
+
         <a href="#" class="link-curso" id="cursoResta">
           <div class="curso-box">
             <div class="curso-imagen"><img src="assets/resta.png" alt="Resta hasta 10"></div>
@@ -254,5 +255,17 @@
       }
     });
   </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const modulo1Completado = localStorage.getItem("modulo1_completo");
+
+    if (modulo1Completado === "true") {
+      const cursoSuma = document.getElementById("cursoSuma");
+      cursoSuma.classList.remove("locked");
+      cursoSuma.href = "detalle.php?modulo=2";  // Redirige al módulo 2
+    }
+  });
+</script>
+
 </body>
 </html>
