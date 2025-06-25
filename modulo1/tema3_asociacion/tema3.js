@@ -107,10 +107,8 @@ const questions = [
 ];
 
 function generateObjects(count, emoji) {
-  // Si no se especifica emoji, usar uno aleatorio
   const defaultEmojis = ['🍎', '🪨', '🌰', '🍓', '🌟', '🍇', '🌼', '⚽', '🔵', '🧩', '🍪'];
   const selectedEmoji = emoji || defaultEmojis[Math.floor(Math.random() * defaultEmojis.length)];
-  
   let html = '<div class="objects-container">';
   for (let i = 0; i < count; i++) {
     html += `<div class="object-item animate-bounce-${i % 3}">${selectedEmoji}</div>`;
@@ -137,7 +135,6 @@ function showQuestion() {
   document.getElementById('btnContinue').disabled = true;
   selectedOption = null;
 
-  // Usar el emoji específico de la pregunta si existe
   document.getElementById('questionContent').innerHTML = generateObjects(q.count, q.emoji);
 
   const optionsContainer = document.getElementById('questionOptions');
@@ -195,7 +192,7 @@ function showAnswerFeedback(correct) {
   document.querySelectorAll('.option-btn').forEach(btn => {
     const val = btn.getAttribute('data-value');
     if (val === String(q.correct)) btn.classList.add('correct');
-    else if (val === selectedOption && !correct) btn.classList.add('incorrect');
+    else if (val == selectedOption && !correct) btn.classList.add('incorrect');
     btn.disabled = true;
   });
   document.getElementById('btnContinue').disabled = true;
@@ -213,7 +210,6 @@ function continueAfterModal() {
 
 function showModal(id) {
   document.getElementById(id).classList.add('show');
-  // Feedback visual motivacional más variado
   if (id === 'correctModal') {
     triggerConfetti();
     const motivationalMessages = [
@@ -277,7 +273,6 @@ function showCompletionModal() {
   document.getElementById('finalCoins').textContent = coins;
   document.getElementById('finalAccuracy').textContent = `${Math.round((correctAnswers / questions.length) * 100)}%`;
   
-  // Mensaje especial según el rendimiento
   const accuracy = (correctAnswers / questions.length) * 100;
   let completionMessage = '';
   if (accuracy >= 90) {
@@ -288,7 +283,6 @@ function showCompletionModal() {
     completionMessage = '¡Buen intento! ¡La práctica te hará mejor! 💪';
   }
   
-  // Agregar mensaje personalizado al modal
   const completedModal = document.getElementById('completedModal');
   let customMsg = completedModal.querySelector('.custom-completion-message');
   if (!customMsg) {
@@ -301,7 +295,14 @@ function showCompletionModal() {
     completedModal.querySelector('.modal-content').insertBefore(customMsg, completedModal.querySelector('.completion-buttons'));
   }
   customMsg.textContent = completionMessage;
+
+  // ¡ESTA LÍNEA ES LA CLAVE PARA DESBLOQUEAR EL SIGUIENTE MÓDULO!
+  localStorage.setItem('modulo1_tema3_terminado', 'true'); // Tema individual
+  localStorage.setItem('modulo1_terminado', 'true');       // Módulo completo
   
+  // TAMBIÉN guardar el progreso del módulo actual
+  localStorage.setItem('currentTopic_modulo1', 'completed');
+
   showModal('completedModal');
 }
 
@@ -336,7 +337,6 @@ function updateHearts() {
   }
 }
 
-// Barra de tiempo funcional
 function updateTimerBar() {
   const bar = document.getElementById('timerBar');
   const barText = document.getElementById('timerBarText');

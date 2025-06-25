@@ -9,66 +9,90 @@
     <link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
-    <div class="navbar">
-        <a href="../../../index.php">Inicio</a>
-        <a href="../../cursos.php">Cursos</a>
-        <span>Módulo 2 - Tema 1: Introducción a la suma</span>
+    <!-- NAVBAR -->
+    <div class="navbar-leccion">
+        <div class="nav-left">
+            <button class="btn-cerrar" onclick="window.location.href='../../detalle.php?modulo=2'">✕</button>
+            <div class="progress-container">
+                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                <span class="progress-text" id="progressText">1/12</span>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="coins-display">
+                <div class="coin-icon-small"><img src="../../../assets/coin.png" alt="Moneda"></div>
+                <span class="coins-count" id="coinsCount">0</span>
+            </div>
+            <div class="hearts-display">
+                <span class="heart" id="heart1">❤️</span>
+                <span class="heart" id="heart2">❤️</span>
+                <span class="heart" id="heart3">❤️</span>
+            </div>
+        </div>
     </div>
-    <main>
-        <h2>Introducción a la suma: Juntar cantidades</h2>
-        <div class="lesson-header">
-            <div class="coins">
-                <span>Monedas: <span id="coinsCount">0</span></span>
-            </div>
-            <div class="hearts">
-                <span id="heart1" class="heart">❤️</span>
-                <span id="heart2" class="heart">❤️</span>
-                <span id="heart3" class="heart">❤️</span>
-            </div>
-        </div>
-        <div class="progress-bar">
-            <div id="progressFill" class="progress-fill"></div>
-            <span id="progressText" class="progress-text"></span>
-        </div>
-        <div class="timer-bar">
-            <div id="timerBar" class="timer-fill"></div>
-            <span id="timerBarText" class="timer-text"></span>
-        </div>
-        <div id="questionTitle" class="question-title"></div>
-        <div id="questionContent" class="question-content"></div>
-        <div id="questionOptions" class="question-options"></div>
-        <button id="btnContinue" onclick="nextQuestion()" disabled>Siguiente</button>
-    </main>
 
-    <!-- Modales de feedback -->
-    <div id="correctModal" class="modal-overlay">
-        <div class="modal-content">
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="leccion-container">
+        <div class="question-card">
+            <div class="question-header">
+                <h2 class="question-title" id="questionTitle"></h2>
+            </div>
+            <!-- Barra de tiempo visual -->
+            <div class="timer-bar-container">
+                <div id="timerBar" class="timer-bar-fill"></div>
+                <div id="timerBarText" class="timer-bar-text"></div>
+            </div>
+            <div class="question-content" id="questionContent"></div>
+            <div class="question-options" id="questionOptions"></div>
+        </div>
+        <div class="continue-section">
+            <button class="btn-continue" id="btnContinue" onclick="nextQuestion()" disabled>Siguiente</button>
+        </div>
+    </div>
+
+    <!-- MODALES -->
+    <div class="modal-overlay" id="correctModal">
+        <div class="modal-content correct">
+            <div class="modal-icon">🎉</div>
             <h3>¡Correcto!</h3>
-            <span id="coinChangeTextCorrect"></span>
+            <p id="coinChangeTextCorrect">+100 monedas</p>
+            <button class="modal-btn" onclick="closeModal()">Continuar</button>
             <div class="motivational-text"></div>
-            <button onclick="closeModal()">Continuar</button>
         </div>
     </div>
-    <div id="incorrectModal" class="modal-overlay">
-        <div class="modal-content">
-            <h3>Incorrecto</h3>
-            <span id="coinChangeTextIncorrect"></span>
-            <div id="correctAnswerText"></div>
+    <div class="modal-overlay" id="incorrectModal">
+        <div class="modal-content incorrect">
+            <div class="modal-icon">😔</div>
+            <h3>¡Oops!</h3>
+            <p class="correct-answer" id="correctAnswerText"></p>
+            <p id="coinChangeTextIncorrect">-200 monedas</p>
+            <button class="modal-btn" onclick="closeModal()">Continuar</button>
             <div class="motivational-text"></div>
-            <button onclick="closeModal()">Continuar</button>
         </div>
     </div>
-    <div id="completedModal" class="modal-overlay">
-        <div class="modal-content">
-            <h3>¡Lección completada!</h3>
-            <p>Monedas finales: <span id="finalCoins"></span></p>
-            <p>Puntaje: <span id="finalAccuracy"></span></p>
-            <button onclick="restartLesson()">Reintentar</button>
-            <button onclick="goToNextLesson()">Siguiente tema</button>
+    <div class="modal-overlay" id="completedModal">
+        <div class="modal-content completed">
+            <div class="modal-icon">🏆</div>
+            <h3>¡Lección Completada!</h3>
+            <div class="completion-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="finalCoins">0</span>
+                    <span class="stat-label">Monedas ganadas</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="finalAccuracy">0%</span>
+                    <span class="stat-label">Precisión</span>
+                </div>
+            </div>
+            <div class="completion-buttons">
+                <button class="modal-btn primary" onclick="goToNextLesson()">Siguiente tema</button>
+                <button class="modal-btn secondary" onclick="restartLesson()">Repetir lección</button>
+            </div>
         </div>
     </div>
 
+    <!-- Confetti y JS principal -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script src="tema1.js"></script>
-    <!-- Si usas una librería de confetti, inclúyela aquí -->
 </body>
 </html>

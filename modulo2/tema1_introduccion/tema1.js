@@ -242,7 +242,9 @@ function closeModal() {
 function showCompletionModal() {
   document.getElementById('finalCoins').textContent = coins;
   document.getElementById('finalAccuracy').textContent = `${Math.round((correctAnswers / questions.length) * 100)}%`;
-  localStorage.setItem('currentTopic', 'tema2_objetos');
+  localStorage.setItem('modulo2_tema1_terminado', 'true');    // Tema individual
+  localStorage.setItem('currentTopic_modulo2', 'tema2');      // Próximo tema
+  localStorage.setItem('coins', coins);  
   showModal('completedModal');
 }
 
