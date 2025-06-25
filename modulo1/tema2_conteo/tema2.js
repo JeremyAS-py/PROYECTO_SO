@@ -119,8 +119,11 @@ function showAnswerFeedback(correct) {
 
 function continueAfterModal() {
   currentQuestionIndex++;
-  if (currentQuestionIndex >= questions.length || hearts <= 0) {
-    localStorage.setItem('tema2Completed', 'true');
+  
+  if (hearts <= 0) {
+    showModal('lostModal'); // Mostrar mensaje de derrota
+  } else if (currentQuestionIndex >= questions.length) {
+    localStorage.setItem('tema1Completed', 'true');
     localStorage.setItem('coins', coins);
     showCompletionModal();
   } else {
@@ -128,6 +131,7 @@ function continueAfterModal() {
     showQuestion();
   }
 }
+
 
 function showModal(id) {
   document.getElementById(id).classList.add('show');
@@ -173,7 +177,7 @@ function closeModal() {
 function showCompletionModal() {
   document.getElementById('finalCoins').textContent = coins;
   document.getElementById('finalAccuracy').textContent = `${Math.round((correctAnswers / questions.length) * 100)}%`;
-  localStorage.setItem('currentTopic', 'tema3');
+  localStorage.setItem('currentTopic_modulo1', 'tema3');
   showModal('completedModal');
 }
 

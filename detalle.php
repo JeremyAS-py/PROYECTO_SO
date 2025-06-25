@@ -7,6 +7,14 @@
   <meta charset="UTF-8">
   <title>Detalle: Reconocimiento de números</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .highlight-modulo {
+      border: 3px solid #4caf50 !important;
+      box-shadow: 0 0 10px #4caf50;
+      background: #e7ffe7 !important;
+      transition: all 0.5s;
+    }
+  </style>
 </head>
 <body>
   <!-- NAVBAR -->
@@ -27,10 +35,7 @@
 
   <!-- CONTENEDOR PRINCIPAL -->
   <div class="detalle-container">
-    
-    <!-- VISTA DETALLE -->
     <div class="detalle-curso">
-
       <!-- Tarjeta izquierda -->
       <div class="detalle-card">
         <img src="assets/math.png" alt="Matemáticas" class="icon-detalle">
@@ -48,77 +53,149 @@
         </div>
       </div>
 
-      <!-- Panel derecho -->
+      <!-- Panel derecho: solo módulos SCROLLEABLES -->
       <div class="detalle-info">
-
-        <!-- Pestaña Módulo -->
-        <div class="module-tab active">
-          MÓDULO I<br><small>Números del 1 al 10</small>
-        </div>
-
-        <!-- Contenedor del camino con tucán -->
-        <div class="path-section">
-          <!-- Camino + Óvalos -->
-          <div class="path-container">
-            <div class="path-step step-1">
-              <div class="step-oval completed">
-                <span class="step-text">Reconocimiento de números y su escritura.</span>
+        <div class="modulos-scroll">
+          <!-- MÓDULO I -->
+          <div id="modulo1" class="module-tab modulo-box">
+            <h2>MÓDULO I<br><small>Números del 1 al 10</small></h2>
+            <div class="path-section">
+              <div class="path-container">
+                <div class="path-step step-1">
+                  <div class="step-oval completed">
+                    <span class="step-text">Reconocimiento de números y su escritura.</span>
+                  </div>
+                </div>
+                <div class="path-step step-2">
+                  <div class="step-oval">
+                    <span class="step-text">Conteo con objetos reales</span>
+                  </div>
+                </div>
+                <div class="path-step step-3">
+                  <div class="step-oval">
+                    <span class="step-text">Asociación número-cantidad.</span>
+                  </div>
+                </div>
+                <div class="path-line line-1"></div>
+                <div class="path-line line-2"></div>
               </div>
             </div>
-            <div class="path-step step-2">
-              <div class="step-oval">
-                <span class="step-text">Conteo con objetos reales</span>
-              </div>
-            </div>
-            <div class="path-step step-3">
-              <div class="step-oval">
-                <span class="step-text">Asociación número-cantidad.</span>
-              </div>
-            </div>
-            <!-- Líneas conectoras -->
-            <div class="path-line line-1"></div>
-            <div class="path-line line-2"></div>
           </div>
+          <!-- MÓDULO II -->
+          <div id="modulo2" class="module-tab modulo-box">
+            <h2>MÓDULO II<br><small>Suma hasta 10</small></h2>
+            <div class="path-section">
+              <div class="path-container">
+                <div class="path-step step-1">
+                  <div class="step-oval">
+                    <span class="step-text">Introducción a la suma como juntar.</span>
+                  </div>
+                </div>
+                <div class="path-step step-2">
+                  <div class="step-oval">
+                    <span class="step-text">Uso de objetos para sumar (fichas, frutas, palitos).</span>
+                  </div>
+                </div>
+                <div class="path-step step-3">
+                  <div class="step-oval">
+                    <span class="step-text">Sumas con apoyo visual y sin llevar.</span>
+                  </div>
+                </div>
+                <div class="path-line line-1"></div>
+                <div class="path-line line-2"></div>
+              </div>
+            </div>
+          </div>
+          <!-- MÓDULO III -->
+          <div id="modulo3" class="module-tab modulo-box">
+            <h2>MÓDULO III<br><small>Resta hasta 10</small></h2>
+            <div class="path-section">
+              <div class="path-container">
+                <div class="path-step step-1">
+                  <div class="step-oval">
+                    <span class="step-text">Introducción a la resta.</span>
+                  </div>
+                </div>
+                <div class="path-step step-2">
+                  <div class="step-oval">
+                    <span class="step-text">Resta con objetos y dibujos.</span>
+                  </div>
+                </div>
+                <div class="path-step step-3">
+                  <div class="step-oval">
+                    <span class="step-text">Restas sin llevar.</span>
+                  </div>
+                </div>
+                <div class="path-line line-1"></div>
+                <div class="path-line line-2"></div>
+              </div>
+            </div>
+          </div>
+          <!-- ...Más módulos si lo necesitas... -->
         </div>
-
-        <!-- CTA Empezar/Continuar -->
+        <!-- SOLO el botón de continuar va fuera del scroll -->
         <div class="detalle-cta">
           <h3 id="ctaTitulo">Reconocimiento de números y su escritura.</h3>
           <button class="btn-empezar" id="btnInicioCurso">Empezar</button>
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- Script para redirigir según el progreso -->
+  <!-- Script para scroll automático y highlight, y redirigir según el progreso -->
   <script>
-    const currentTopic = localStorage.getItem('currentTopic');
-    const boton = document.getElementById('btnInicioCurso');
-    const titulo = document.getElementById('ctaTitulo');
-
-    if (currentTopic === 'tema2') {
-      boton.textContent = 'Continuar';
-      boton.onclick = () => window.location.href = '/modulo1/tema2_conteo/leccion.php';
-      titulo.textContent = 'Conteo con objetos reales';
-    } else if (currentTopic === 'tema3') {
-      boton.textContent = 'Continuar';
-      boton.onclick = () => window.location.href = 'modulo1/tema3_asociacion/leccion.php';
-      titulo.textContent = 'Asociación número-cantidad';
-    } else {
-      boton.textContent = 'Empezar';
-      boton.onclick = () => window.location.href = 'modulo1/tema1_reconocimiento/leccion.php';
-      titulo.textContent = 'Reconocimiento de números y su escritura.';
+    function getModuloParam() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('modulo');
     }
+    document.addEventListener('DOMContentLoaded', function() {
+      const moduloNum = getModuloParam() || "1";
+      const moduloId = 'modulo' + moduloNum;
+      const element = document.getElementById(moduloId);
+      if (element) {
+        element.scrollIntoView({behavior: 'smooth', block: 'center'});
+        element.classList.add('highlight-modulo');
+        setTimeout(() => {
+          element.classList.remove('highlight-modulo');
+        }, 4000);
+      }
+
+      // Lee el progreso SOLO del módulo actual
+      const currentTopic = localStorage.getItem('currentTopic_modulo' + moduloNum);
+      const boton = document.getElementById('btnInicioCurso');
+      const titulo = document.getElementById('ctaTitulo');
+
+      // Puedes personalizar los textos y rutas según tus temas reales
+      if (currentTopic === 'tema2') {
+        boton.textContent = 'Continuar';
+        boton.onclick = () => window.location.href = `modulo${moduloNum}/tema2_conteo/leccion.php`;
+        titulo.textContent = (moduloNum === "2")
+          ? 'Uso de objetos para sumar (fichas, frutas, palitos).'
+          : 'Conteo con objetos reales';
+      } else if (currentTopic === 'tema3') {
+        boton.textContent = 'Continuar';
+        boton.onclick = () => window.location.href = `modulo${moduloNum}/tema3_asociacion/leccion.php`;
+        titulo.textContent = (moduloNum === "2")
+          ? 'Sumas con apoyo visual y sin llevar.'
+          : 'Asociación número-cantidad';
+      } else {
+        boton.textContent = 'Empezar';
+        boton.onclick = () => window.location.href = (
+          moduloNum === "2"
+            ? `modulo2/tema1_introduccion/leccion.php`
+            : moduloNum === "3"
+              ? `modulo3/tema1_introduccion_resta/leccion.php`
+              : `modulo1/tema1_reconocimiento/leccion.php`
+        );
+        titulo.textContent = (
+          moduloNum === "2"
+            ? 'Introducción a la suma como juntar.'
+            : moduloNum === "3"
+              ? 'Introducción a la resta.'
+              : 'Reconocimiento de números y su escritura.'
+        );
+      }
+    });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-

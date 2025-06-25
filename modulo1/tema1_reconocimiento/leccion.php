@@ -64,6 +64,20 @@
     </div>
   </div>
 
+  <!-- Modal para derrota (vidas = 0) -->
+<div id="lostModal" class="modal-overlay">
+  <div class="modal-content completed">
+    <div class="modal-icon">😵</div>
+    <h3>¡Suerte para la próxima!</h3>
+    <p>Perdiste tus 3 vidas. Intenta de nuevo con más calma.</p>
+    <div class="completion-buttons">
+      <button class="modal-btn" onclick="restartLesson()">Reintentar</button>
+      <button class="modal-btn secondary" onclick="window.location.href='../../cursos.php'">Volver al curso</button>
+    </div>
+  </div>
+</div>
+
+
   <div class="modal-overlay" id="incorrectModal">
     <div class="modal-content incorrect">
       <div class="modal-icon">😔</div>
