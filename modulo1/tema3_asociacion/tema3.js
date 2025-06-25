@@ -8,116 +8,31 @@ let timerValue = 10;
 let timeTaken = 0;
 
 const questions = [
-  { 
-    type: 'match', 
-    title: "¡Cuenta las manzanas rojas! 🍎", 
-    count: 3, 
-    emoji: '🍎',
-    options: [2, 3, 4, 5], 
-    correct: 3 
-  },
-  { 
-    type: 'match', 
-    title: "¿Cuántas estrellitas brillan? ⭐", 
-    count: 5, 
-    emoji: '⭐',
-    options: [4, 5, 6, 3], 
-    correct: 5 
-  },
-  { 
-    type: 'match', 
-    title: "¡Solo hay una pelota! ⚽", 
-    count: 1, 
-    emoji: '⚽',
-    options: [0, 1, 2, 3], 
-    correct: 1 
-  },
-  { 
-    type: 'match', 
-    title: "Cuenta los corazones de amor 💖", 
-    count: 4, 
-    emoji: '💖',
-    options: [3, 4, 5, 2], 
-    correct: 4 
-  },
-  { 
-    type: 'match', 
-    title: "¿Cuántas flores hay en el jardín? 🌸", 
-    count: 6, 
-    emoji: '🌸',
-    options: [5, 6, 7, 4], 
-    correct: 6 
-  },
-  { 
-    type: 'match', 
-    title: "Los patitos van nadando 🦆", 
-    count: 2, 
-    emoji: '🦆',
-    options: [1, 2, 3, 4], 
-    correct: 2 
-  },
-  { 
-    type: 'match', 
-    title: "¡Cuenta las caramelos dulces! 🍬", 
-    count: 7, 
-    emoji: '🍬',
-    options: [6, 7, 8, 5], 
-    correct: 7 
-  },
-  { 
-    type: 'match', 
-    title: "Los gatitos juegan juntos 🐱", 
-    count: 8, 
-    emoji: '🐱',
-    options: [7, 8, 9, 6], 
-    correct: 8 
-  },
-  { 
-    type: 'match', 
-    title: "¿Cuántos globos vuelan alto? 🎈", 
-    count: 9, 
-    emoji: '🎈',
-    options: [8, 9, 10, 7], 
-    correct: 9 
-  },
-  { 
-    type: 'match', 
-    title: "Las mariposas bailan 🦋", 
-    count: 4, 
-    emoji: '🦋',
-    options: [3, 4, 5, 6], 
-    correct: 4 
-  },
-  { 
-    type: 'match', 
-    title: "¡Son muchos pastelitos! 🧁", 
-    count: 10, 
-    emoji: '🧁',
-    options: [9, 10, 8, 11], 
-    correct: 10 
-  },
-  { 
-    type: 'match', 
-    title: "Los soles brillan radiantes ☀️", 
-    count: 3, 
-    emoji: '☀️',
-    options: [2, 3, 4, 1], 
-    correct: 3 
-  }
+  { type: 'match', title: "¡Cuenta las manzanas rojas! 🍎", count: 3, emoji: '🍎', options: [2, 3, 4, 5], correct: 3 },
+  { type: 'match', title: "¿Cuántas estrellitas brillan? ⭐", count: 5, emoji: '⭐', options: [4, 5, 6, 3], correct: 5 },
+  { type: 'match', title: "¡Solo hay una pelota! ⚽", count: 1, emoji: '⚽', options: [0, 1, 2, 3], correct: 1 },
+  { type: 'match', title: "Cuenta los corazones de amor 💖", count: 4, emoji: '💖', options: [3, 4, 5, 2], correct: 4 },
+  { type: 'match', title: "¿Cuántas flores hay en el jardín? 🌸", count: 6, emoji: '🌸', options: [5, 6, 7, 4], correct: 6 },
+  { type: 'match', title: "Los patitos van nadando 🦆", count: 2, emoji: '🦆', options: [1, 2, 3, 4], correct: 2 },
+  { type: 'match', title: "¡Cuenta los caramelos dulces! 🍬", count: 7, emoji: '🍬', options: [6, 7, 8, 5], correct: 7 },
+  { type: 'match', title: "Los gatitos juegan juntos 🐱", count: 8, emoji: '🐱', options: [7, 8, 9, 6], correct: 8 },
+  { type: 'match', title: "¿Cuántos globos vuelan alto? 🎈", count: 9, emoji: '🎈', options: [8, 9, 10, 7], correct: 9 },
+  { type: 'match', title: "Las mariposas bailan 🦋", count: 4, emoji: '🦋', options: [3, 4, 5, 6], correct: 4 },
+  { type: 'match', title: "¡Son muchos pastelitos! 🧁", count: 10, emoji: '🧁', options: [9, 10, 8, 11], correct: 10 },
+  { type: 'match', title: "Los soles brillan radiantes ☀️", count: 3, emoji: '☀️', options: [2, 3, 4, 1], correct: 3 }
 ];
 
 function generateObjects(count, emoji) {
-  const defaultEmojis = ['🍎', '🪨', '🌰', '🍓', '🌟', '🍇', '🌼', '⚽', '🔵', '🧩', '🍪'];
-  const selectedEmoji = emoji || defaultEmojis[Math.floor(Math.random() * defaultEmojis.length)];
   let html = '<div class="objects-container">';
   for (let i = 0; i < count; i++) {
-    html += `<div class="object-item animate-bounce-${i % 3}">${selectedEmoji}</div>`;
+    html += `<div class="object-item animate-bounce-${i % 3}">${emoji}</div>`;
   }
   html += '</div>';
   return html;
 }
 
 function initLesson() {
+  coins = parseInt(localStorage.getItem('coins')) || 0;
   updateProgress();
   updateCoins();
   updateHearts();
@@ -169,20 +84,25 @@ function selectOption(button, value) {
 function nextQuestion() {
   clearInterval(timerInterval);
   if (!selectedOption) return;
+
   const q = questions[currentQuestionIndex];
   const correct = String(selectedOption) === String(q.correct);
   showAnswerFeedback(correct);
 
   if (correct) {
     correctAnswers++;
-    coins += 100;
+    const gained = 100 + timerValue * 10;
+    coins += gained;
     updateCoins();
-    document.getElementById('coinChangeTextCorrect').textContent = '+100 monedas';
+    document.getElementById('coinChangeTextCorrect').textContent = `+${gained} monedas`;
     setTimeout(() => showModal('correctModal'), 800);
   } else {
     hearts--;
+    coins = Math.max(0, coins - 200);
+    updateCoins();
     updateHearts();
     document.getElementById('correctAnswerText').textContent = `La respuesta correcta es: ${q.correct}`;
+    document.getElementById('coinChangeTextIncorrect').textContent = `-200 monedas`;
     setTimeout(() => showModal('incorrectModal'), 800);
   }
 }
@@ -191,7 +111,7 @@ function showAnswerFeedback(correct) {
   const q = questions[currentQuestionIndex];
   document.querySelectorAll('.option-btn').forEach(btn => {
     const val = btn.getAttribute('data-value');
-    if (val === String(q.correct)) btn.classList.add('correct');
+    if (val == q.correct) btn.classList.add('correct');
     else if (val == selectedOption && !correct) btn.classList.add('incorrect');
     btn.disabled = true;
   });
@@ -200,7 +120,12 @@ function showAnswerFeedback(correct) {
 
 function continueAfterModal() {
   currentQuestionIndex++;
-  if (currentQuestionIndex >= questions.length || hearts <= 0) {
+  
+  if (hearts <= 0) {
+    showModal('lostModal'); // Mostrar mensaje de derrota
+  } else if (currentQuestionIndex >= questions.length) {
+    localStorage.setItem('tema1Completed', 'true');
+    localStorage.setItem('coins', coins);
     showCompletionModal();
   } else {
     updateProgress();
@@ -208,29 +133,28 @@ function continueAfterModal() {
   }
 }
 
+
 function showModal(id) {
   document.getElementById(id).classList.add('show');
   if (id === 'correctModal') {
     triggerConfetti();
-    const motivationalMessages = [
+    const messages = [
       '¡Excelente! ¡Eres increíble!',
       '¡Muy bien! ¡Sigue así!',
       '¡Perfecto! ¡Eres un campeón!',
       '¡Genial! ¡Lo hiciste súper bien!',
       '¡Fantástico! ¡Eres muy inteligente!'
     ];
-    const randomMessage = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
-    setMotivationalText('correctModal', randomMessage);
+    setMotivationalText('correctModal', messages[Math.floor(Math.random() * messages.length)]);
   } else if (id === 'incorrectModal') {
-    const encouragingMessages = [
+    const messages = [
       '¡No te preocupes, tú puedes!',
       '¡Inténtalo otra vez, casi lo tienes!',
       '¡Está bien, todos aprendemos!',
       '¡No pasa nada, sigues siendo genial!',
       '¡Vamos, la próxima la tienes!'
     ];
-    const randomMessage = encouragingMessages[Math.floor(Math.random() * encouragingMessages.length)];
-    setMotivationalText('incorrectModal', randomMessage);
+    setMotivationalText('incorrectModal', messages[Math.floor(Math.random() * messages.length)]);
   }
 }
 
@@ -241,10 +165,6 @@ function setMotivationalText(modalId, text) {
   if (!txt) {
     txt = document.createElement('div');
     txt.className = 'motivational-text';
-    txt.style.marginTop = '10px';
-    txt.style.fontSize = '16px';
-    txt.style.fontWeight = 'bold';
-    txt.style.color = modalId === 'correctModal' ? '#4CAF50' : '#FF9800';
     modal.querySelector('.modal-content').appendChild(txt);
   }
   txt.textContent = text;
@@ -252,14 +172,9 @@ function setMotivationalText(modalId, text) {
 
 function triggerConfetti() {
   if (window.confetti) {
-    window.confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff']
-    });
+    window.confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
   } else {
-    document.body.style.background = "linear-gradient(45deg, #b5f5c2, #ffd1dc)";
+    document.body.style.background = "#b5f5c2";
     setTimeout(() => document.body.style.background = "", 500);
   }
 }
@@ -272,38 +187,16 @@ function closeModal() {
 function showCompletionModal() {
   document.getElementById('finalCoins').textContent = coins;
   document.getElementById('finalAccuracy').textContent = `${Math.round((correctAnswers / questions.length) * 100)}%`;
-  
-  const accuracy = (correctAnswers / questions.length) * 100;
-  let completionMessage = '';
-  if (accuracy >= 90) {
-    completionMessage = '¡Eres un súper genio de los números! 🌟';
-  } else if (accuracy >= 70) {
-    completionMessage = '¡Muy buen trabajo! ¡Sigue practicando! 👏';
-  } else {
-    completionMessage = '¡Buen intento! ¡La práctica te hará mejor! 💪';
-  }
-  
-  const completedModal = document.getElementById('completedModal');
-  let customMsg = completedModal.querySelector('.custom-completion-message');
-  if (!customMsg) {
-    customMsg = document.createElement('p');
-    customMsg.className = 'custom-completion-message';
-    customMsg.style.fontSize = '18px';
-    customMsg.style.fontWeight = 'bold';
-    customMsg.style.color = '#4CAF50';
-    customMsg.style.marginTop = '15px';
-    completedModal.querySelector('.modal-content').insertBefore(customMsg, completedModal.querySelector('.completion-buttons'));
-  }
-  customMsg.textContent = completionMessage;
 
-  // ¡ESTA LÍNEA ES LA CLAVE PARA DESBLOQUEAR EL SIGUIENTE MÓDULO!
-  localStorage.setItem('modulo1_tema3_terminado', 'true'); // Tema individual
-  localStorage.setItem('modulo1_terminado', 'true');       // Módulo completo
-  
-  // TAMBIÉN guardar el progreso del módulo actual
-  localStorage.setItem('currentTopic_modulo1', 'completed');
+  // Aquí reiniciamos al tema1 después de completar tema3
+  localStorage.setItem('currentTopic', 'tema1');
 
   showModal('completedModal');
+}
+
+
+function goToNextLesson() {
+  window.location.href = "../tema4_nombre/leccion.php"; // Reemplaza por la ruta real
 }
 
 function restartLesson() {
@@ -324,16 +217,13 @@ function updateProgress() {
 
 function updateCoins() {
   document.getElementById('coinsCount').textContent = coins;
+  localStorage.setItem('coins', coins);
 }
 
 function updateHearts() {
   for (let i = 1; i <= 3; i++) {
     const heart = document.getElementById(`heart${i}`);
-    if (i > hearts) {
-      heart.classList.add('lost');
-    } else {
-      heart.classList.remove('lost');
-    }
+    i > hearts ? heart.classList.add('lost') : heart.classList.remove('lost');
   }
 }
 
@@ -344,11 +234,8 @@ function updateTimerBar() {
   bar.style.width = percent + "%";
 
   bar.classList.remove('low', 'critical');
-  if (timerValue <= 3) {
-    bar.classList.add('critical');
-  } else if (timerValue <= 6) {
-    bar.classList.add('low');
-  }
+  if (timerValue <= 3) bar.classList.add('critical');
+  else if (timerValue <= 6) bar.classList.add('low');
 
   barText.textContent = timerValue > 0 ? timerValue : "¡Tiempo!";
 

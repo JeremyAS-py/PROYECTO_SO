@@ -7,20 +7,17 @@ let timerInterval;
 let timerValue = 10;
 let timeTaken = 0;
 
-// Ejemplo de preguntas de conteo, cámbialas según tu unidad
 const questions = [
-  { type: 'counting', title: '¿Cuántos patitos hay?', content: '🦆🦆🦆', options: ['2', '3', '4', '5'], correct: '3' },
-  { type: 'counting', title: 'Cuenta los manzanas 🍎🍎🍎🍎', content: '', options: ['2', '3', '4', '5'], correct: '4' },
-  { type: 'counting', title: '¿Cuántos autos ves? 🚗🚗', content: '', options: ['1', '2', '3', '4'], correct: '2' },
-  { type: 'counting', title: 'Selecciona el número de estrellas ⭐⭐⭐⭐⭐', content: '', options: ['3', '4', '5', '6'], correct: '5' },
-  { type: 'counting', title: '¿Cuántos globos hay? 🎈🎈🎈🎈🎈🎈', content: '', options: ['5', '6', '7', '8'], correct: '6' },
-  { type: 'counting', title: '¿Cuántos peces? 🐟🐟🐟', content: '', options: ['2', '3', '4', '5'], correct: '3' },
-  { type: 'counting', title: 'Cuenta los corazones ❤️❤️❤️❤️❤️', content: '', options: ['3', '4', '5', '6'], correct: '5' },
-  { type: 'counting', title: '¿Cuántas flores? 🌸🌸🌸🌸', content: '', options: ['2', '3', '4', '5'], correct: '4' },
-  { type: 'counting', title: 'Selecciona el número de gatos 🐱🐱', content: '', options: ['1', '2', '3', '4'], correct: '2' },
-  { type: 'counting', title: '¿Cuántos soles? ☀️☀️☀️', content: '', options: ['2', '3', '4', '5'], correct: '3' },
-  { type: 'counting', title: 'Cuenta los árboles 🌳🌳🌳🌳🌳', content: '', options: ['4', '5', '6', '7'], correct: '5' },
-  { type: 'counting', title: '¿Cuántos lápices? ✏️✏️✏️✏️', content: '', options: ['3', '4', '5', '6'], correct: '4' }
+  { question: "Tenías 5 manzanas 🍎 y te comiste 2. ¿Cuántas quedan?", options: ["2", "3", "5", "4"], correct: "3" },
+  { question: "Había 4 globos 🎈 y se pincharon 1. ¿Cuántos quedan?", options: ["3", "2", "4", "5"], correct: "3" },
+  { question: "Tenías 6 caramelos 🍬 y regalaste 2. ¿Cuántos tienes ahora?", options: ["4", "2", "6", "3"], correct: "4" },
+  { question: "Había 3 lápices ✏️ y perdiste 1. ¿Cuántos te quedan?", options: ["1", "3", "2", "0"], correct: "2" },
+  { question: "Tenías 10 galletas 🍪 y comiste 5. ¿Cuántas quedan?", options: ["4", "3", "5", "10"], correct: "5" },
+  { question: "Había 8 flores 🌸 y se marchitaron 3. ¿Cuántas siguen bonitas?", options: ["5", "6", "4", "3"], correct: "5" },
+  { question: "Tenías 7 monedas 💰 y gastaste 4. ¿Cuántas te quedan?", options: ["4", "3", "2", "5"], correct: "3" },
+  { question: "Había 9 mariposas 🦋 y volaron 6. ¿Cuántas quedan?", options: ["3", "2", "1", "6"], correct: "3" },
+  { question: "Tenías 5 stickers 🖼️ y diste 2. ¿Cuántos quedan?", options: ["2", "3", "1", "5"], correct: "3" },
+  { question: "Había 6 patitos 🦆 y se fueron 2. ¿Cuántos quedan?", options: ["4", "5", "3", "2"], correct: "4" }
 ];
 
 function initLesson() {
@@ -38,7 +35,7 @@ function showQuestion() {
   updateTimerBar();
 
   const q = questions[currentQuestionIndex];
-  document.getElementById('questionTitle').textContent = q.title;
+  document.getElementById('questionTitle').textContent = q.question;
   document.getElementById('btnContinue').disabled = true;
   selectedOption = null;
 
@@ -53,15 +50,7 @@ function showQuestion() {
     optionsContainer.appendChild(btn);
   });
 
-  const questionContent = document.getElementById('questionContent');
-  questionContent.innerHTML = '';
-  // Si hay content, lo muestra (por si se quieren poner dibujos o emojis grandes)
-  if (q.content && q.content !== '?') {
-    const numberDiv = document.createElement('div');
-    numberDiv.className = 'number-display';
-    numberDiv.textContent = q.content;
-    questionContent.appendChild(numberDiv);
-  }
+  document.getElementById('questionContent').innerHTML = '';
 
   timerInterval = setInterval(() => {
     timerValue--;
@@ -119,11 +108,8 @@ function showAnswerFeedback(correct) {
 
 function continueAfterModal() {
   currentQuestionIndex++;
-  
-  if (hearts <= 0) {
-    showModal('lostModal'); // Mostrar mensaje de derrota
-  } else if (currentQuestionIndex >= questions.length) {
-    localStorage.setItem('tema1Completed', 'true');
+  if (currentQuestionIndex >= questions.length || hearts <= 0) {
+    localStorage.setItem('mod3tema1Completed', 'true');
     localStorage.setItem('coins', coins);
     showCompletionModal();
   } else {
@@ -132,15 +118,13 @@ function continueAfterModal() {
   }
 }
 
-
 function showModal(id) {
   document.getElementById(id).classList.add('show');
-  // Feedback visual motivacional
   if (id === 'correctModal') {
     triggerConfetti();
-    setMotivationalText('correctModal', '¡Muy bien! ¡Eres un genio!');
+    setMotivationalText('correctModal', '¡Súper bien! Has restado correctamente.');
   } else if (id === 'incorrectModal') {
-    setMotivationalText('incorrectModal', '¡No pasa nada, tú puedes!');
+    setMotivationalText('incorrectModal', '¡Ups! Intenta de nuevo, puedes lograrlo.');
   }
 }
 
@@ -158,11 +142,7 @@ function setMotivationalText(modalId, text) {
 
 function triggerConfetti() {
   if (window.confetti) {
-    window.confetti({
-      particleCount: 70,
-      spread: 90,
-      origin: { y: 0.7 }
-    });
+    window.confetti({ particleCount: 70, spread: 90, origin: { y: 0.7 } });
   } else {
     document.body.style.background = "#b5f5c2";
     setTimeout(() => document.body.style.background = "", 350);
@@ -177,7 +157,7 @@ function closeModal() {
 function showCompletionModal() {
   document.getElementById('finalCoins').textContent = coins;
   document.getElementById('finalAccuracy').textContent = `${Math.round((correctAnswers / questions.length) * 100)}%`;
-  localStorage.setItem('currentTopic_modulo1', 'tema3');
+  localStorage.setItem('currentTopic', 'tema2_objetos');
   showModal('completedModal');
 }
 
@@ -190,11 +170,6 @@ function restartLesson() {
   localStorage.setItem('coins', 0);
   closeModal();
   setTimeout(() => initLesson(), 300);
-}
-
-function goToNextLesson() {
-  // Cambia la ruta al siguiente tema si aplica
-  window.location.href = "../tema3_asociacion/leccion.php";
 }
 
 function updateProgress() {

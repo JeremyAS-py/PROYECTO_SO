@@ -43,15 +43,56 @@
       </div>
     </div>
 
+    <!-- Grid de cursos con enlaces -->
     <!-- Grid de cursos con imágenes y control de avance -->
     <div class="grid-cursos">
+      <!-- Módulo 1 -->
+      <a href="detalle.php?modulo=1" class="link-curso">
       <!-- Módulo I: siempre desbloqueado -->
       <a href="detalle.php?modulo=1" class="link-curso" id="cursoEscritura">
         <div class="curso-box">
-          <div class="curso-imagen"><img src="assets/escritura.png" alt="Matemáticas"></div>
+          <div class="curso-imagen"><img src="assets/escritura.png" alt="Reconocimiento"></div>
           <span>Reconocimiento de números y su escritura.</span>
         </div>
       </a>
+
+      <!-- Módulo 2 -->
+      <a href="detalle.php?modulo=2" class="link-curso">
+        <div class="curso-box">
+          <div class="curso-imagen"><img src="assets/suma.png" alt="Suma hasta 10"></div>
+          <span>Suma hasta 10</span>
+        </div>
+      </a>
+
+      <!-- Módulo 3 -->
+      <a href="detalle.php?modulo=3" class="link-curso">
+        <div class="curso-box">
+          <div class="curso-imagen"><img src="assets/resta.png" alt="Resta hasta 10"></div>
+          <span>Resta hasta 10</span>
+        </div>
+      </a>
+
+      <!-- Puedes hacer lo mismo con los siguientes -->
+      <div class="curso-box">
+        <div class="curso-imagen"><img src="assets/veinte.png" alt="Números del 11 al 20"></div>
+        <span>Números del 11 al 20</span>
+      </div>
+      <div class="curso-box">
+        <div class="curso-imagen"><img src="assets/figuras.png" alt="Figuras geométricas básicas"></div>
+        <span>Figuras geométricas básicas</span>
+      </div>
+      <div class="curso-box">
+        <div class="curso-imagen"><img src="assets/medicion.png" alt="Medición básica"></div>
+        <span>Medición básica</span>
+      </div>
+      <div class="curso-box">
+        <div class="curso-imagen"><img src="assets/direccion.png" alt="Orientación espacial"></div>
+        <span>Orientación espacial</span>
+      </div>
+      <div class="curso-box">
+        <div class="curso-imagen"><img src="assets/patron.png" alt="Clasificación y patrones"></div>
+        <span>Clasificación y patrones</span>
+      </div>
       <!-- Módulo II: desbloqueo progresivo -->
       <a href="#" class="link-curso" id="cursoSuma">
         <div class="curso-box">

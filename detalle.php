@@ -1,12 +1,37 @@
 <?php
-// Aquí puedes incluir lógica de autenticación, cargar contenido desde base de datos, etc.
+$modulo = isset($_GET['modulo']) ? intval($_GET['modulo']) : 1;
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Detalle: Reconocimiento de números</title>
+  <title>Detalle: Módulo <?= $modulo ?></title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Estilo solo cuando es módulo 3 con 1 tema */
+    .solo-tema-uno .path-section {
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .solo-tema-uno .path-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .solo-tema-uno .path-step {
+      margin: 0;
+    }
+    .solo-tema-uno .step-oval {
+      padding: 15px 30px;
+      font-size: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .solo-tema-uno .path-line {
+      display: none;
+    }
+  </style>
   <style>
     .highlight-modulo {
       border: 3px solid #4caf50 !important;
@@ -16,17 +41,14 @@
     }
   </style>
 </head>
-<body>
+<body class="<?= ($modulo === 3) ? 'solo-tema-uno' : '' ?>">
+
   <!-- NAVBAR -->
   <div class="navbar">
     <img src="assets/municipalidad.png" alt="Logo" class="logo">
     <nav>
-      <a href="index.php" class="nav-link">
-        <img src="assets/icono-panel.png" alt="Panel" class="nav-icon"> PANEL
-      </a>
-      <a href="cursos.php" class="nav-link active">
-        <img src="assets/icono-cursos.png" alt="Cursos" class="nav-icon"> CURSOS
-      </a>
+      <a href="index.php" class="nav-link"><img src="assets/icono-panel.png" alt="Panel" class="nav-icon"> PANEL</a>
+      <a href="cursos.php" class="nav-link active"><img src="assets/icono-cursos.png" alt="Cursos" class="nav-icon"> CURSOS</a>
     </nav>
     <div class="dropdown">
       <span>1º PRIMARIA</span><span class="arrow">&#9660;</span>
@@ -55,6 +77,31 @@
 
       <!-- Panel derecho: solo módulos SCROLLEABLES -->
       <div class="detalle-info">
+        <div class="module-tab active">
+          <?php if ($modulo === 3): ?>
+            MÓDULO 3<br><small>Resta hasta 10</small>
+          <?php elseif ($modulo === 1): ?>
+            MÓDULO I<br><small>Números del 1 al 10</small>
+          <?php else: ?>
+            MÓDULO <?= $modulo ?><br><small>Sin título definido</small>
+          <?php endif; ?>
+        </div>
+
+        <div class="path-section">
+          <div class="path-container path-container-centrado">
+            <?php if ($modulo === 3): ?>
+              <div class="path-step step-1">
+                <div class="step-oval">
+                  <span class="step-text">Introducción a la resta como quitar.</span>
+                </div>
+              </div>
+            <?php elseif ($modulo === 1): ?>
+              <div class="path-step step-1"><div class="step-oval completed"><span class="step-text">Reconocimiento de números y su escritura.</span></div></div>
+              <div class="path-step step-2"><div class="step-oval"><span class="step-text">Conteo con objetos reales</span></div></div>
+              <div class="path-step step-3"><div class="step-oval"><span class="step-text">Asociación número-cantidad.</span></div></div>
+              <div class="path-line line-1"></div>
+              <div class="path-line line-2"></div>
+            <?php endif; ?>
         <div class="modulos-scroll">
           <!-- MÓDULO I -->
           <div id="modulo1" class="module-tab modulo-box">
@@ -133,17 +180,46 @@
           </div>
           <!-- ...Más módulos si lo necesitas... -->
         </div>
+
+        <!-- CTA -->
         <!-- SOLO el botón de continuar va fuera del scroll -->
         <div class="detalle-cta">
-          <h3 id="ctaTitulo">Reconocimiento de números y su escritura.</h3>
+          <h3 id="ctaTitulo">Inicia la lección</h3>
           <button class="btn-empezar" id="btnInicioCurso">Empezar</button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Script para avance -->
   <!-- Script para scroll automático y highlight, y redirigir según el progreso -->
   <script>
+    const currentTopic = localStorage.getItem('currentTopic');
+    const btn = document.getElementById('btnInicioCurso');
+    const titulo = document.getElementById('ctaTitulo');
+    const modulo = <?= $modulo ?>;
+
+    if (modulo === 3) {
+      btn.textContent = 'Empezar';
+      btn.onclick = () => window.location.href = 'modulo3/tema1_introduccion/leccion.php';
+      titulo.textContent = 'Introducción a la resta como quitar.';
+    }
+
+    if (modulo === 1) {
+      if (currentTopic === 'tema2') {
+        btn.textContent = 'Continuar';
+        btn.onclick = () => window.location.href = 'modulo1/tema2_conteo/leccion.php';
+        titulo.textContent = 'Conteo con objetos reales';
+      } else if (currentTopic === 'tema3') {
+        btn.textContent = 'Continuar';
+        btn.onclick = () => window.location.href = 'modulo1/tema3_asociacion/leccion.php';
+        titulo.textContent = 'Asociación número-cantidad.';
+      } else {
+        btn.textContent = 'Empezar';
+        btn.onclick = () => window.location.href = 'modulo1/tema1_reconocimiento/leccion.php';
+        titulo.textContent = 'Reconocimiento de números y su escritura.';
+      }
+    }
     function getModuloParam() {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get('modulo');
