@@ -15,7 +15,7 @@
       <button class="btn-cerrar" onclick="window.location.href='../../detalle.php'">✕</button>
       <div class="progress-container">
         <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <span class="progress-text" id="progressText">1/12</span> <!-- Cambia a 1/12 si tienes 12 preguntas, ajusta si tienes otra cantidad -->
+        <span class="progress-text" id="progressText">1/12</span>
       </div>
     </div>
     <div class="nav-right">
@@ -50,30 +50,46 @@
     </div>
   </div>
 
-  <!-- MODALES -->
+  <!-- MODAL CORRECTO -->
   <div class="modal-overlay" id="correctModal">
     <div class="modal-content correct">
       <div class="modal-icon">🎉</div>
       <h3>¡Correcto!</h3>
       <p id="coinChangeTextCorrect">+100 monedas</p>
-      <!-- El texto motivacional lo añade el JS automáticamente -->
+      <div class="motivational-text"></div>
       <button class="modal-btn" onclick="closeModal()">Continuar</button>
     </div>
   </div>
 
+   <!-- Modal para derrota (vidas = 0) -->
+<div id="lostModal" class="modal-overlay">
+  <div class="modal-content completed">
+    <div class="modal-icon">😵</div>
+    <h3>¡Suerte para la próxima!</h3>
+    <p>Perdiste tus 3 vidas. Intenta de nuevo con más calma.</p>
+    <div class="completion-buttons">
+      <button class="modal-btn" onclick="restartLesson()">Reintentar</button>
+      <button class="modal-btn secondary" onclick="window.location.href='../../cursos.php'">Volver al curso</button>
+    </div>
+  </div>
+</div>
+
+  <!-- MODAL INCORRECTO -->
   <div class="modal-overlay" id="incorrectModal">
     <div class="modal-content incorrect">
       <div class="modal-icon">😔</div>
       <h3>¡Oops!</h3>
-      <p class="correct-answer" id="correctAnswerText">La respuesta correcta es: 5</p>
-      <!-- El texto motivacional lo añade el JS automáticamente -->
+      <p id="correctAnswerText">La respuesta correcta es: X</p>
+      <p id="coinChangeTextIncorrect" class="coin-change-text">-200 monedas</p>
+      <div class="motivational-text"></div>
       <button class="modal-btn" onclick="closeModal()">Continuar</button>
     </div>
   </div>
 
+  <!-- MODAL DE COMPLETADO -->
   <div class="modal-overlay" id="completedModal">
     <div class="modal-content completed">
-      <div class="modal-icon">🏆</div>
+      <div class="modal-icon">🏁</div>
       <h3>¡Lección Completada!</h3>
       <div class="completion-stats">
         <div class="stat-item">
@@ -92,6 +108,7 @@
     </div>
   </div>
 
+  <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
   <script src="tema3.js"></script>
 </body>

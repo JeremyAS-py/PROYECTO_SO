@@ -27,6 +27,19 @@
       object-fit: contain;
       margin-right: 24px;
     }
+    .curso-block { margin-bottom: 48px; }
+    .curso-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 32px;
+    }
+    .curso-header .img-destacada {
+      width: 84px;
+      height: 84px;
+      object-fit: contain;
+      margin-right: 24px;
+    }
   </style>
 </head>
 <body>
@@ -263,6 +276,7 @@
         };
       }
 
+      // Resto de módulos matemáticas...
       // Resto de módulos matemáticas...
       const mod2Done = localStorage.getItem('modulo2_terminado') === 'true';
       const cursoResta = document.getElementById('cursoResta');
