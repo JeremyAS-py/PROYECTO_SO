@@ -133,7 +133,6 @@ function continueAfterModal() {
   }
 }
 
-
 function showModal(id) {
   document.getElementById(id).classList.add('show');
   if (id === 'correctModal') {
@@ -211,19 +210,31 @@ function showCompletionModal() {
   }
   customMsg.textContent = completionMessage;
 
-  // ¡ESTA LÍNEA ES LA CLAVE PARA DESBLOQUEAR EL SIGUIENTE MÓDULO!
-  localStorage.setItem('modulo1_tema3_terminado', 'true'); // Tema individual
-  localStorage.setItem('modulo1_terminado', 'true');       // Módulo completo
+  // VARIABLES SINCRONIZADAS CON DETALLE.PHP
+  // Marcar tema 3 del módulo 1 como completado
+  localStorage.setItem('modulo1_tema3_terminado', 'true');
   
-  // TAMBIÉN guardar el progreso del módulo actual
+  // Marcar módulo 1 como completado
+  localStorage.setItem('modulo1_terminado', 'true');
+  
+  // Desbloquear módulo 2 - ESTA ES LA CLAVE
+  localStorage.setItem('modulo2_desbloqueado', 'true');
+  
+  // Guardar progreso del módulo 1 como completado
   localStorage.setItem('currentTopic_modulo1', 'completed');
+  
+  // AGREGAR ESTAS LÍNEAS PARA DEBUG
+  console.log('Variables guardadas:');
+  console.log('modulo1_terminado:', localStorage.getItem('modulo1_terminado'));
+  console.log('modulo2_desbloqueado:', localStorage.getItem('modulo2_desbloqueado'));
 
   showModal('completedModal');
 }
 
-
+// FUNCIÓN ACTUALIZADA: Redirige al detalle del módulo 2
 function goToNextLesson() {
-  window.location.href = "../tema4_nombre/leccion.php"; // Reemplaza por la ruta real
+  // Redirigir al detalle del módulo 2 para que vea el progreso
+  window.location.href = "../detalle.php?modulo=2";
 }
 
 function restartLesson() {

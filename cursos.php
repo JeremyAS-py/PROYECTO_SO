@@ -181,6 +181,7 @@
       </div>
     </section>
 
+
     <!-- CURSO: CIENCIA DEL ENTORNO -->
     <section class="curso-block">
       <div class="curso-header">
@@ -243,6 +244,36 @@
           <div class="curso-box">
             <div class="curso-imagen"><img src="assets/ayuda.png" alt="Ayudo en casa y en la escuela"></div>
             <span> Ayudo en casa y en la escuela</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CURSO: PROGRAMACION -->
+    <section class="curso-block">
+      <div class="curso-header">
+        <img src="assets/computadora.png" alt="Programacion" class="img-destacada">
+        <div>
+          <h2 class="curso-titulo">Programación</h2>
+        </div>
+      </div>
+      <div class="grid-cursos">
+        <a href="detalle_progra.php?modulo=1" class="link-curso" id="cursoNaturaleza">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/movimiento.png" alt="Movimiento"></div>
+            <span>movimiento</span>
+          </div>
+        </a>
+        <a href="detalle_progra.php?modulo=2" class="link-curso" id="cursoCuerpo">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/secuencia.png" alt="Secuencia"></div>
+            <span>Secuencias</span>
+          </div>
+        </a>
+        <a href="detalle_progra.php?modulo=3" class="link-curso" id="cursoAnimales">
+          <div class="curso-box">
+            <div class="curso-imagen"><img src="assets/causa.png" alt="Causa y efecto"></div>
+            <span>Causa y efecto</span>
           </div>
         </a>
       </div>
