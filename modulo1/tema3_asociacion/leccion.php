@@ -111,5 +111,12 @@
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
   <script src="tema3.js"></script>
+
+<script>
+  // Guardar que el módulo 1 fue completado
+  localStorage.setItem("modulo1_completo", "true");
+</script>
+
+
 </body>
 </html>
